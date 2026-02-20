@@ -1,0 +1,8 @@
+name = "threat-feed"
+compatibility_date = "2024-03-20"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"
+
+[[kv_namespaces]]
+binding = "THREAT_FEED_KV"
+id = "3178d33f01a94dd398711f2a340eabba"
