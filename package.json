@@ -7,13 +7,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "pages:build": "npx @cloudflare/next-on-pages",
-    "pages:deploy": "npm run pages:build && wrangler pages deploy .vercel/output/static",
-    "preview": "npm run pages:build && wrangler pages dev .vercel/output/static"
+    "cf:build": "npx @opennextjs/cloudflare build",
+    "cf:preview": "npm run cf:build && npx wrangler dev",
+    "cf:deploy": "npm run cf:build && npx wrangler deploy"
   },
   "dependencies": {
     "@fontsource/fira-code": "^5.2.7",
     "@fontsource/jura": "^5.2.7",
+    "@opennextjs/cloudflare": "^1.16.5",
     "@radix-ui/react-scroll-area": "^1.2.10",
     "@radix-ui/react-slot": "^1.2.4",
     "class-variance-authority": "^0.7.1",

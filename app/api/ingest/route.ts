@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { ThreatData } from '@/lib/data/threats';
-import { getRequestContext } from '@cloudflare/next-on-pages';
+import { getCloudflareContext } from '@opennextjs/cloudflare';
 
 export const runtime = 'edge';
 
@@ -16,7 +16,7 @@ export async function POST(request: Request) {
             );
         }
 
-        const env = getRequestContext().env as unknown as CloudflareEnv;
+        const env = (await getCloudflareContext()).env as unknown as CloudflareEnv;
 
         if (env.THREAT_FEED_KV) {
             await env.THREAT_FEED_KV.put('current_feed', JSON.stringify(data));

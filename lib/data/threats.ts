@@ -105,19 +105,19 @@ export const mockThreatData: ThreatData = {
     ]
 };
 
-import { getRequestContext } from '@cloudflare/next-on-pages';
+import { getCloudflareContext } from '@opennextjs/cloudflare';
 
 export async function getThreatData(): Promise<ThreatData> {
     try {
-        const env = getRequestContext().env as unknown as CloudflareEnv;
+        const env = (await getCloudflareContext()).env as unknown as CloudflareEnv;
         if (env && env.THREAT_FEED_KV) {
             const dataString = await env.THREAT_FEED_KV.get('current_feed');
             if (dataString) {
                 return JSON.parse(dataString) as ThreatData;
             }
         }
-    } catch (error) {
-        // getRequestContext throws outside of edge runtime, perfectly fine to swallow for local non-wrangler dev
+    } catch {
+        // getCloudflareContext throws outside of Cloudflare runtime; use mock data locally
     }
 
     // Fallback to mock data if KV is unreachable or empty
