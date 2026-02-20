@@ -1,3 +1,5 @@
+import { getCloudflareContext } from '@opennextjs/cloudflare';
+
 export interface ThreatData {
     hasData: boolean;
     metadata: {
@@ -105,7 +107,6 @@ export const mockThreatData: ThreatData = {
     ]
 };
 
-import { getCloudflareContext } from '@opennextjs/cloudflare';
 
 export async function getThreatData(): Promise<ThreatData> {
     try {
